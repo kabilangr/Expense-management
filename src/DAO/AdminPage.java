@@ -6,14 +6,14 @@ public class AdminPage
 {
 public void adminPage()throws Exception
 {
+	System.out.println("You are in");
 	int kill=0;
 	while(kill!=1)
 	{
-	System.out.println("You are in");
 	System.out.println("1.Create Employee");
 	System.out.println("2.Search Employee");
 	System.out.println("3.Remove Employee");
-	System.out.println("4.Change Employee");
+	System.out.println("4.Change Employee details");
 	System.out.println("5.back to main");
 	Scanner in=new Scanner(System.in);
 	System.out.println("Enter your choice");
@@ -37,7 +37,8 @@ public void adminPage()throws Exception
 		break;
 	}
 	case 4:
-	{
+	{ 
+		dh.changeDetails();
 		break;
 	}
 	case 5:

@@ -1,6 +1,6 @@
 package Controller;
 import java.util.*;
-import Utility.CrudExcel;
+import Utility.*;
 import Model.*;
 import Service.*;
 import DAO.*;
@@ -8,7 +8,7 @@ public class MainClass {
 	public static void main(String args[])throws Exception
 	{
 		int kill=0;
-		Scanner in=new Scanner(System.in);
+		Scanner i=new Scanner(System.in);
 		int c;
 		while(kill!=1) 
 		{	
@@ -17,17 +17,17 @@ public class MainClass {
 		System.out.print("\n3.User signup");
 		System.out.print("\n4.Exit");
 		System.out.println("\nEnter your option");
-		c=in.nextInt();
+		c=i.nextInt();
 		switch(c)
 		{
 		case 1:
 		{
 			System.out.println("Your have chosen Admin login");
 			System.out.println("Enter Admin Name");
-			String name=in.nextLine();
+			String name=i.nextLine();
 			System.out.println("Enter Admin Password");
-			String pass=in.nextLine();
-			CrudExcel crud=new CrudExcel();
+			String pass=i.nextLine();
+			AdminName crud=new AdminName();
 			crud.setName();
 			crud.setPassword();
 			Admin admin=new Admin(name,pass,crud.getName(),crud.getPassword());
@@ -44,11 +44,27 @@ public class MainClass {
 		case 2:
 		{
 			System.out.println("Your have chosen User login");
+			System.out.println("Enter User Name");
+			String name=i.nextLine();
+			System.out.println("Enter Uer Password");
+			String pass=i.nextLine();
+			UserName un=new UserName();
+			un.setName(name);
+			un.setPassword();
+			User user=new User(name,pass,un.getName(),un.getPassword());
+			Validation v=new Validation();
+			if((v.nameValidation(user))&&(v.passwordValidation(user)))
+			{
+				UserPage u=new UserPage();
+              u.userPage(name);
+			}
 			break;
 		}
 		case 3:
 		{
 			System.out.println("Your have chosen User signup");
+			UserSignUp us=new UserSignUp();
+			us.userSignUp();
 			break;
 		}
 		case 4:

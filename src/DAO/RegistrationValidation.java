@@ -11,7 +11,7 @@ public class RegistrationValidation
 		}
 		return false;
 	}
-	private boolean validPassword(String password, String confirmPassword)
+	public boolean validPassword(String password, String confirmPassword)
 	{
 		char ch=0;int k=0,c=0,n=0,s=0;
 		for(int i=0;i<password.length();i++)
@@ -32,7 +32,7 @@ public class RegistrationValidation
 		}
 		return false;
 	}
-	private boolean validEmail(String email) {
+	public boolean validEmail(String email) {
 		int k=0;int c=0;char ch=0;
 		if(email=="")
 			return false;

@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="C:/Users/Dagger/eclipse-workspace/poi-ooxml-4.1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Dagger/eclipse-workspace/poi-ooxml-schemas-4.1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Dagger/eclipse-workspace/xmlbeans-3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dagger/eclipse-workspace/Pdf/itext-5.0.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
