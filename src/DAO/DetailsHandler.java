@@ -146,21 +146,42 @@ public class DetailsHandler
 	   if(j!=0)
 	   {
 		   System.out.println("test");
-		   Cell cell;
+		   int age,idthere;
+		   double bs,det,take;
 	   for(int i=j;i<=rd;i++)
 	   {
-		   for(int k=0;k<=9;k++)
-		   {
-		   str=(ms.getRow(i).getCell(k)).toString();
-		    row=ms.createRow(i-1);
-		    System.out.println(str);
-		   cell = row.createCell(k);
-               cell.setCellValue((String) str);
-               System.out.println(k);
+	   		row=ms.createRow(i-1);
+			   str=(ms.getRow(i).getCell(0)).toString();
+			   Cell cell0 = row.createCell(0);
+               cell0.setCellValue((String) str);
+			   idthere=(int)Double.parseDouble((ms.getRow(i).getCell(1)).toString());
+			   Cell cell1 = row.createCell(1);
+               cell1.setCellValue((Integer) idthere);
+               age=(int)Double.parseDouble((ms.getRow(i).getCell(2)).toString());
+			   Cell cell2 = row.createCell(2);
+               cell2.setCellValue((Integer) age);
+               str=(ms.getRow(i).getCell(3)).toString();
+			   Cell cell3 = row.createCell(3);
+               cell3.setCellValue((String) str);
+               str=(ms.getRow(i).getCell(4)).toString();
+			   Cell cell4 = row.createCell(4);
+               cell4.setCellValue((String) str);
+               bs=Double.parseDouble((ms.getRow(i).getCell(5)).toString());
+			   Cell cell5 = row.createCell(5);
+               cell5.setCellValue((Double) bs);
+               det=Double.parseDouble((ms.getRow(i).getCell(6)).toString());
+			   Cell cell6 = row.createCell(6);
+               cell6.setCellValue((Double) det);
+               take=Double.parseDouble((ms.getRow(i).getCell(7)).toString());
+			   Cell cell7 = row.createCell(7);
+               cell7.setCellValue((Double) take);
+               str=(ms.getRow(i).getCell(8)).toString();
+			   Cell cell8 = row.createCell(8);
+               cell8.setCellValue((String) str);
+               str=(ms.getRow(i).getCell(9)).toString();
+			   Cell cell = row.createCell(9);
+               cell.setCellValue((String) str);    
 	   }
-	   }
-	   
-	   System.out.println("CHumma");
 	    row=ms.createRow(rd);
 	    System.out.println(rd);
         ms.removeRow(row);
@@ -170,7 +191,6 @@ public class DetailsHandler
         os.flush();
         os.close();
 	   }
-	   System.out.println("CHumma1");
 	   myWorkBook.close();
 	   fis.close();
    }

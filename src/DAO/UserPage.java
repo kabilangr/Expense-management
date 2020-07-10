@@ -48,7 +48,6 @@ public class UserPage {
 			System.out.println("4.Change Password");
 			System.out.println("5.Pay Slip");
 			System.out.println("6.Exit");
-			System.out.println("5.back to main");
 			System.out.println("Enter your choice");
 			int ch=Integer.parseInt(in.readLine());
 			switch(ch)
@@ -77,6 +76,11 @@ public class UserPage {
 			{
 				ud.paySlipMaking(f);
 			break;
+			}
+			case 6:
+			{
+				kill=1;
+				break;
 			}
 			default:
 			{

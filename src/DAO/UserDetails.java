@@ -280,7 +280,7 @@ public class UserDetails {
 		XSSFWorkbook myWorkBook = new XSSFWorkbook (fis);
 		XSSFSheet ms = myWorkBook.getSheetAt(0);
 		  String name=(ms.getRow(f).getCell(0)).toString();
-	       int id=Integer.parseInt((ms.getRow(f).getCell(1)).toString());
+	       int id=(int)Double.parseDouble((ms.getRow(f).getCell(1)).toString());
 	       String position=(ms.getRow(f).getCell(3)).toString();
 	       String email=(ms.getRow(f).getCell(8)).toString();
 	       String address=(ms.getRow(f).getCell(4)).toString();
