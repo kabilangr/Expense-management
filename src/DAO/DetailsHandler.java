@@ -1,13 +1,15 @@
 package DAO;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.util.*;
 import Model.Employee;
 public class DetailsHandler 
 {
@@ -18,50 +20,54 @@ public class DetailsHandler
 		FileInputStream fis = new FileInputStream(myFile);
 		XSSFWorkbook myWorkBook = new XSSFWorkbook (fis);
 		XSSFSheet ms = myWorkBook.getSheetAt(0);
-		Scanner in=new Scanner(System.in);
+		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter Employee Name");
-	    String en=in.nextLine();
+	    String en=in.readLine();
 		System.out.println("Enter Employee ID");
-		int id=in.nextInt();
+		int id=Integer.parseInt(in.readLine());
 		System.out.println("Enter Employee Age");
-		int age=in.nextInt();
+		int age=Integer.parseInt(in.readLine());
 		System.out.println("Enter Employee Position");
-		String position=in.nextLine();
+		String position=in.readLine();
 		System.out.println("Enter Employee Email ID");
-		String email=in.nextLine();
+		String email=in.readLine();
 		System.out.println("Enter Employee Address");
-		String address=(in.nextLine());
+		String address=in.readLine();
 		System.out.println("Enter Employee Basic Salary");
-		double bs=in.nextDouble();
+		double bs=Double.parseDouble(in.readLine());
 		System.out.println("Enter Employee deductions");
-		double d=in.nextDouble();
+		double d=Double.parseDouble(in.readLine());
 		Employee obj=new Employee(en,id,age,position,address,bs,d);
 		int rd=ms.getLastRowNum();
-		XSSFRow row=ms.createRow(rd);
-		 Object[] o= {obj.getEmployeeName(),obj.getId(),obj.getAge(),obj.getPosition(),obj.getAddress(),obj.getBasicSal(),obj.getDeductions()};
-		 Object cell_value=o;
-		 for(int i=0;i<7;i++)
-		 {
-			 Cell cell = row.createCell(i);//1
-             if (cell_value instanceof String) {
-                 cell.setCellValue((String) cell_value);
-             } else if (cell_value instanceof Integer) {
-                 cell.setCellValue((Integer) cell_value);
-             }else if (cell_value instanceof Boolean) {
-                 cell.setCellValue((Boolean) cell_value);
-             }else if (cell_value instanceof Date) {
-                 cell.setCellValue((Date) cell_value);
-             }
-                 else if(cell_value instanceof Double )
-                 {
-                	 cell.setCellValue((Double) cell_value); 
-		 }     
-             
-   }
-		Cell cell=row.createCell(7);
-		cell.setCellValue((Double) sc.salaryCalcutaions(obj.getBasicSal(),obj.getDeductions()));
-		cell=row.createCell(8);
-		cell.setCellValue((String) email);
+		XSSFRow row=ms.createRow(rd+1);
+		Cell cell1=row.createCell(7);
+		cell1.setCellValue((Double) sc.salaryCalcutaions(obj.getBasicSal(),obj.getDeductions()));
+		Cell cell2=row.createCell(0);
+		cell2.setCellValue((String) obj.getEmployeeName());
+		Cell cell3=row.createCell(1);
+		cell3.setCellValue((int) obj.getId());
+		Cell cell4=row.createCell(2);
+		cell4.setCellValue((int) obj.getAge());
+		Cell cell5=row.createCell(3);
+		cell5.setCellValue((String) obj.getPosition());
+		Cell cell6=row.createCell(4);
+		cell6.setCellValue((String) obj.getAddress());
+		Cell cell7=row.createCell(5);
+		cell7.setCellValue((Double) obj.getBasicSal());
+		Cell cell8=row.createCell(6);
+		cell8.setCellValue((Double) obj.getDeductions());
+		Cell cell9=row.createCell(8);
+		cell9.setCellValue((String) email);
+		Cell cell10=row.createCell(9);
+		cell10.setCellValue((String) "null");	
+		FileOutputStream os = new FileOutputStream(myFile);
+        myWorkBook.write(os);
+        System.out.println("Done");
+        os.flush();
+        os.close();
+		   myWorkBook.close();
+		   fis.close();
+		   
    }
    public void searchEmployee()throws Exception
    {
@@ -69,38 +75,49 @@ public class DetailsHandler
 		FileInputStream fis = new FileInputStream(myFile);
 		XSSFWorkbook myWorkBook = new XSSFWorkbook (fis);
 		XSSFSheet ms = myWorkBook.getSheetAt(0);
-	   Scanner in=new Scanner(System.in);
+		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
 	   System.out.println("Enter Employee Name");
-	   String name=in.nextLine();
-	   System.out.println("Enter Employee Name");
-	   int id=in.nextInt();
-	   int idl=0;
+	   String name=in.readLine();
+	   System.out.println("Enter Employee Id");
+	   int id=Integer.parseInt(in.readLine());
+	   double idl=0;
 	   String str="";
 	   int j=0;
 	   int rd=ms.getLastRowNum();
-	   for(int i=1;i<rd;i++)
+	   System.out.println(rd);
+	   for(int i=1;i<=rd;i++)
 	   {
 		   str=(ms.getRow(i).getCell(0)).toString();
-		   idl=Integer.parseInt((ms.getRow(i).getCell(1).toString()));
+		   System.out.println(str);
+		   idl=Double.parseDouble((ms.getRow(i).getCell(1).toString()));
 		   if((str.equals(name))&&(idl==id))
 			   j=i+1;
 	   }
 	   if(j!=0)
 	   {
 		   System.out.println("Employee Name: "+(ms.getRow(j-1).getCell(0)).toString());
-           System.out.println("Employee Id: "+(ms.getRow(j-1).getCell(1)).toString());
-           System.out.println("Employee Age: "+(ms.getRow(j-1).getCell(2)).toString());
+           System.out.println("Employee Id: "+(int)idl);
+           double age=Double.parseDouble((ms.getRow(j-1).getCell(2)).toString());
+          double bs=Double.parseDouble((ms.getRow(j-1).getCell(5)).toString());
+          double d=Double.parseDouble((ms.getRow(j-1).getCell(6)).toString());
+           System.out.println("Employee Age: "+(int)age);
            System.out.println("Employee Position: "+(ms.getRow(j-1).getCell(3)).toString());
            System.out.println("Employee Email:"+(ms.getRow(j-1).getCell(8)).toString());
            System.out.println("Employee Address: "+(ms.getRow(j-1).getCell(4)).toString());
-           System.out.println("Employee Basic Salary: "+(ms.getRow(j-1).getCell(5)).toString());
-           System.out.println("Employee Deduction: "+(ms.getRow(j-1).getCell(6)).toString());
+           System.out.println("Employee Basic Salary: "+bs);
+           System.out.println("Employee Deduction: "+d);
+           XSSFRow row=ms.createRow(j-1);
+           Cell cell=row.createCell(7);
+           SalaryCalculator sc=new SalaryCalculator();
+   		cell.setCellValue((Double) sc.salaryCalcutaions(bs,d));
            System.out.println("Employee Take Home Salary: "+(ms.getRow(j-1).getCell(7)).toString());
 	   }
 	   else
 	   {
 		   System.out.println("Wrong Search Name and ID");
 	   }
+	   myWorkBook.close();
+	   fis.close();
    }
    public void removeEmployee()throws Exception
    {
@@ -108,38 +125,54 @@ public class DetailsHandler
 		FileInputStream fis = new FileInputStream(myFile);
 		XSSFWorkbook myWorkBook = new XSSFWorkbook (fis);
 		XSSFSheet ms = myWorkBook.getSheetAt(0);
-	   Scanner in=new Scanner(System.in);
+		XSSFRow row;
+		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
 	   System.out.println("Enter Employee Name");
-	   String name=in.nextLine();
+	   String name=in.readLine();
 	   System.out.println("Enter Employee Id");
-	   int id=in.nextInt();
+	   int id=Integer.parseInt(in.readLine());
 	   int idl=0;
 	   String str="";
 	   int j=0;
 	   int rd=ms.getLastRowNum();
-	   for(int i=1;i<rd;i++)
+	   for(int i=1;i<=rd;i++)
 	   {
 		   str=(ms.getRow(i).getCell(0)).toString();
-		   idl=Integer.parseInt((ms.getRow(i).getCell(1).toString()));
+		   idl=(int)Double.parseDouble((ms.getRow(i).getCell(1).toString()));
 		   if((str.equals(name))&&(idl==id))
 			   j=i+1;
 	   }
-	   for(int i=j;i<rd;i++)
+
+	   if(j!=0)
 	   {
-		   for(int k=0;k<9;k++)
+		   System.out.println("test");
+		   Cell cell;
+	   for(int i=j;i<=rd;i++)
+	   {
+		   for(int k=0;k<=9;k++)
 		   {
 		   str=(ms.getRow(i).getCell(k)).toString();
-		   XSSFRow row=ms.createRow(i-1);
-		   Cell cell = row.createCell(k);
+		    row=ms.createRow(i-1);
+		    System.out.println(str);
+		   cell = row.createCell(k);
                cell.setCellValue((String) str);
+               System.out.println(k);
 	   }
 	   }
-	   XSSFRow row=ms.createRow(rd);
-	   for( j=0;j<9;j++)
-	   {
-		   row.removeCell(row.getCell(j));
-
+	   
+	   System.out.println("CHumma");
+	    row=ms.createRow(rd);
+	    System.out.println(rd);
+        ms.removeRow(row);
+		FileOutputStream os = new FileOutputStream(myFile);
+        myWorkBook.write(os);
+        System.out.println("Done");
+        os.flush();
+        os.close();
 	   }
+	   System.out.println("CHumma1");
+	   myWorkBook.close();
+	   fis.close();
    }
    public void changeDetails()throws Exception
    {
@@ -148,23 +181,32 @@ public class DetailsHandler
 		XSSFWorkbook myWorkBook = new XSSFWorkbook (fis);
 		XSSFSheet ms = myWorkBook.getSheetAt(0);
 		RegistrationValidation rv=new RegistrationValidation();
-	   Scanner in=new Scanner(System.in);
+		   SalaryCalculator sc=new SalaryCalculator();
+		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
 	   System.out.println("Enter Employee Name");
-	   String name=in.nextLine();
-	   System.out.println("Enter Employee Name");
-	   int id=in.nextInt();
+	   String name=in.readLine();
+	   System.out.println("Enter Employee ID");
+	   int id=Integer.parseInt(in.readLine());
 	   int idl=0;
 	   String str="";
-	   int j=0;
+	   int j=0,idnew,agenew;
 	   int rd=ms.getLastRowNum();
-	   for(int i=1;i<rd;i++)
+	   for(int i=1;i<=rd;i++)
 	   {
 		   str=(ms.getRow(i).getCell(0)).toString();
-		   idl=Integer.parseInt((ms.getRow(i).getCell(1).toString()));
+		   idl=(int)Double.parseDouble((ms.getRow(i).getCell(1).toString()));
 		   if((str.equals(name))&&(idl==id))
 			   j=i;
 	   }
 	   int kill=0;
+	   int idthere=(int)Double.parseDouble(ms.getRow(j).getCell(1).toString());
+	   int agethere=(int)Double.parseDouble(ms.getRow(j).getCell(2).toString());
+	   String posthere=(ms.getRow(j).getCell(3).toString());
+	   String addthere=(ms.getRow(j).getCell(4).toString());
+	   double bsthere=Double.parseDouble(ms.getRow(j).getCell(5).toString());
+		  double detthere=Double.parseDouble(ms.getRow(j).getCell(6).toString());
+		   String emailthere=(ms.getRow(j).getCell(8).toString());
+		   String pass=(ms.getRow(j).getCell(9).toString());
 	   while(kill!=1)
 	   {
 	   System.out.println("1.change ID");
@@ -176,129 +218,111 @@ public class DetailsHandler
 	   System.out.println("7.Change Email");
 	   System.out.println("8.Exit");
 	   System.out.println("Enter your choice:");
-	   int ch=in.nextInt();
+	   int ch=Integer.parseInt(in.readLine());
 	   switch(ch)
 	   {
 	   case 1:
 	   {
 		   
-		  int idthere=Integer.parseInt(ms.getRow(j).getCell(1).toString());
+		  
 		   System.out.println("Previous Id: "+idthere);
 		   System.out.println("Want to change?(y/n)");
-		   char c=in.next().charAt(0);
-		   if((c=='y')||(c=='Y'))
+		   String c=in.readLine();
+		   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 		   {
 			   System.out.println("Enter ID:");
-			   int idnew=in.nextInt();
-		   XSSFRow row=ms.createRow(j);
-		   Cell cell = row.createCell(1);
-               cell.setCellValue((Integer) idnew);
+			    idnew=Integer.parseInt(in.readLine());
+			    idthere=idnew;
 		   }
 		   
 		   break;
 	   }
 	   case 2:
 	   {
-			  int agethere=Integer.parseInt(ms.getRow(j).getCell(2).toString());
+			  
 			   System.out.println("Previous age: "+agethere);
 			   System.out.println("Want to change?(y/n)");
-			   char c=in.next().charAt(0);
-			   if((c=='y')||(c=='Y'))
+			   String c=in.readLine();
+			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   System.out.println("Enter Age:");
-				   int agenew=in.nextInt();
-			   XSSFRow row=ms.createRow(j);
-			   Cell cell = row.createCell(2);
-	               cell.setCellValue((Integer) agenew);
+				   agenew=Integer.parseInt(in.readLine());
+				   agethere=agenew;
 			   }
 		   break;
 	   }
 	   case 3:
 	   {
-			  String posthere=(ms.getRow(j).getCell(3).toString());
+			  
 			   System.out.println("Previous Position: "+posthere);
 			   System.out.println("Want to change?(y/n)");
-			   char c=in.next().charAt(0);
-			   if((c=='y')||(c=='Y'))
+			   String c=in.readLine();
+			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   System.out.println("Enter Position:");
-				   String posnew=in.nextLine();
-			   XSSFRow row=ms.createRow(j);
-			   Cell cell = row.createCell(3);
-	               cell.setCellValue((String) posnew);
+				   String posnew=in.readLine();
+                    posthere=posnew;
 			   }
 		   break;
 	   }
 	   case 4:
 	   {
-			  String addthere=(ms.getRow(j).getCell(4).toString());
+			 
 			   System.out.println("Previous Address: "+addthere);
 			   System.out.println("Want to change?(y/n)");
-			   char c=in.next().charAt(0);
-			   if((c=='y')||(c=='Y'))
+			   String c=in.readLine();
+			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   System.out.println("Enter Address:");
-				   String addnew=in.nextLine();
-			   XSSFRow row=ms.createRow(j);
-			   Cell cell = row.createCell(4);
-	               cell.setCellValue((String) addnew);
+				   String addnew=in.readLine();
+				   addthere=addnew;
 			   }
 		   break;
 	   }
 	   case 5:
 	   {
-		   SalaryCalculator sc=new SalaryCalculator();
-			  double bsthere=Double.parseDouble(ms.getRow(j).getCell(5).toString());
+
+			 
 			   System.out.println("Previous Basic Salary: "+bsthere);
 			   System.out.println("Want to change?(y/n)");
-			   char c=in.next().charAt(0);
-			   if((c=='y')||(c=='Y'))
+			   String c=in.readLine();
+			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   System.out.println("Enter Basic Salary:");
-				   double bsnew=in.nextDouble();
-			   XSSFRow row=ms.createRow(j);
-			   Cell cell = row.createCell(5);
-	               cell.setCellValue((Double) bsnew);
-	               double det=Double.parseDouble(ms.getRow(j).getCell(6).toString());
-	               cell = row.createCell(7);
-	               cell.setCellValue((Double) (sc.salaryCalcutaions(bsnew, det)));
+				   double bsnew=Double.parseDouble(in.readLine());
+                       bsthere=bsnew;
 			   }
 		   break;
 	   }
 	   case 6:
 	   {
-		   SalaryCalculator sc=new SalaryCalculator();
-			  double detthere=Double.parseDouble(ms.getRow(j).getCell(6).toString());
 			   System.out.println("Previous Deduction: "+detthere);
 			   System.out.println("Want to change?(y/n)");
-			   char c=in.next().charAt(0);
-			   if((c=='y')||(c=='Y'))
+			   String c=in.readLine();
+			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   System.out.println("Enter Deduction:");
-				   double denew=in.nextDouble();
-			   XSSFRow row=ms.createRow(j);
-			   Cell cell = row.createCell(6);
-	               cell.setCellValue((Double) denew);
-	               double bs=Double.parseDouble(ms.getRow(j).getCell(5).toString());
-	               cell = row.createCell(7);
-	               cell.setCellValue((Double) (sc.salaryCalcutaions(bs, denew)));
+				   double detnew=Double.parseDouble(in.readLine());
+
+	              detthere=detnew;
+
 			   }
 		   break;
 	   }
 	   case 7:
 	   {
-		   int flag=0;String emailnew="",str1="";
-		   String emailthere=(ms.getRow(j).getCell(8).toString());
+		   int flag=0;String emailnew="";
+
 		   System.out.println("Previous Email Id: "+emailthere);
 		   System.out.println("Want to change?(y/n)");
-		   char c=in.next().charAt(0);
-		   if((c=='y')||(c=='Y'))
+		   String c=in.readLine();
+		   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 		   {
 			   while(flag!=1)
 			   {
 			   System.out.println("Enter Email Id:");
-			   emailnew=in.nextLine();
-			   str1=emailnew;
+			   emailnew=in.readLine();
+			   emailthere=emailnew;
 			   if(rv.validEmail(emailnew))
 			   {
 				   flag=1;
@@ -306,9 +330,6 @@ public class DetailsHandler
 			   else
 				   System.out.println("Enter a valid Email Id");
 			   }
-		   XSSFRow row=ms.createRow(j);
-		   Cell cell = row.createCell(8);
-               cell.setCellValue((String) str1);
 		   }
 		   break;
 	   }
@@ -323,14 +344,45 @@ public class DetailsHandler
 	   }
 	   }
 	   }
+		XSSFRow row=ms.createRow(j);
+		Cell cell1=row.createCell(7);
+		cell1.setCellValue((Double) sc.salaryCalcutaions(bsthere,detthere));
+		Cell cell2=row.createCell(0);
+		cell2.setCellValue((String) name);
+		Cell cell3=row.createCell(1);
+		cell3.setCellValue((int) idthere);
+		Cell cell4=row.createCell(2);
+		cell4.setCellValue((int) agethere);
+		Cell cell5=row.createCell(3);
+		cell5.setCellValue((String) posthere);
+		Cell cell6=row.createCell(4);
+		cell6.setCellValue((String) addthere);
+		Cell cell7=row.createCell(5);
+		cell7.setCellValue((Double) bsthere);
+		Cell cell8=row.createCell(6);
+		cell8.setCellValue((Double) detthere);
+		Cell cell9=row.createCell(8);
+		cell9.setCellValue((String) emailthere);
+		Cell cell10=row.createCell(9);
+		cell10.setCellValue((String) pass);
+		FileOutputStream os = new FileOutputStream(myFile);
+       myWorkBook.write(os);
+       System.out.println("Done");
+       os.flush();
+       os.close();
 	   System.out.println("Employee Name: "+(ms.getRow(j).getCell(0)).toString());
-       System.out.println("Employee Id: "+(ms.getRow(j).getCell(1)).toString());
-       System.out.println("Employee Age: "+(ms.getRow(j).getCell(2)).toString());
+	   id=(int)Double.parseDouble((ms.getRow(j).getCell(1)).toString());
+       System.out.println("Employee Id: "+(id));
+       int age=(int)Double.parseDouble((ms.getRow(j).getCell(2)).toString());
+       System.out.println("Employee Age: "+age);
        System.out.println("Employee Position: "+(ms.getRow(j).getCell(3)).toString());
        System.out.println("Employee Email:"+(ms.getRow(j).getCell(8)).toString());
        System.out.println("Employee Address: "+(ms.getRow(j).getCell(4)).toString());
        System.out.println("Employee Basic Salary: "+(ms.getRow(j).getCell(5)).toString());
        System.out.println("Employee Deduction: "+(ms.getRow(j).getCell(6)).toString());
        System.out.println("Employee Take Home Salary: "+(ms.getRow(j).getCell(7)).toString());
+	   myWorkBook.close();
+	   fis.close();
    }
+
 }

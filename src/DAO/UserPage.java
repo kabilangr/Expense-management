@@ -1,8 +1,10 @@
 package DAO;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.Scanner;
+import java.io.InputStreamReader;
+
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -11,25 +13,29 @@ public class UserPage {
 		public void userPage(String name)throws Exception
 		{
 			System.out.println("You are in");
-			Scanner in=new Scanner(System.in);
+			BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
 			UserDetails ud=new UserDetails();
 			File myFile = new File("./Check.xlsx"); 
 			FileInputStream fis = new FileInputStream(myFile);
 			XSSFWorkbook myWorkBook = new XSSFWorkbook (fis);
-			XSSFSheet mySheet = myWorkBook.getSheetAt(1);
+			XSSFSheet mySheet = myWorkBook.getSheetAt(0);
 			int rd=mySheet.getLastRowNum();
-			String str="",st;int f=0;
-			for(int i=1;i<rd;i++)
+			String str="",st;
+			int f=0;
+			for(int i=1;i<=rd;i++)
 			{
 				str=mySheet.getRow(i).getCell(0).toString();
 				st=mySheet.getRow(i).getCell(8).toString();
-				if(name.equals(str)){
+				if(name.equals(str))
+				{
 					f=i;
+					System.out.println("1");
 					break;
 				}
 				if(name.equals(st))
 				{
 					f=i;
+					System.out.println("2");
 					break;
 				}
 			}
@@ -44,7 +50,7 @@ public class UserPage {
 			System.out.println("6.Exit");
 			System.out.println("5.back to main");
 			System.out.println("Enter your choice");
-			int ch=in.nextInt();
+			int ch=Integer.parseInt(in.readLine());
 			switch(ch)
 			{
 			case 1:
@@ -79,5 +85,8 @@ public class UserPage {
 				}
 			
 			}
+			   myWorkBook.close();
+			   fis.close();
+
 		}
 }

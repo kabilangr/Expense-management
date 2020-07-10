@@ -1,5 +1,5 @@
 package Controller;
-import java.util.*;
+import java.io.*;
 import Utility.*;
 import Model.*;
 import Service.*;
@@ -8,25 +8,26 @@ public class MainClass {
 	public static void main(String args[])throws Exception
 	{
 		int kill=0;
-		Scanner i=new Scanner(System.in);
+		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
 		int c;
 		while(kill!=1) 
 		{	
-		System.out.print("\n1.Admin login");
+		System.out.print("1.Admin login");
 		System.out.print("\n2.User login");
 		System.out.print("\n3.User signup");
 		System.out.print("\n4.Exit");
 		System.out.println("\nEnter your option");
-		c=i.nextInt();
+		c=Integer.parseInt(in.readLine());
 		switch(c)
 		{
 		case 1:
 		{
+			String name;String pass;
 			System.out.println("Your have chosen Admin login");
 			System.out.println("Enter Admin Name");
-			String name=i.nextLine();
+			name=in.readLine();
 			System.out.println("Enter Admin Password");
-			String pass=i.nextLine();
+			pass=in.readLine();
 			AdminName crud=new AdminName();
 			crud.setName();
 			crud.setPassword();
@@ -45,9 +46,9 @@ public class MainClass {
 		{
 			System.out.println("Your have chosen User login");
 			System.out.println("Enter User Name");
-			String name=i.nextLine();
-			System.out.println("Enter Uer Password");
-			String pass=i.nextLine();
+			String name=in.readLine();
+			System.out.println("Enter User Password");
+			String pass=in.readLine();
 			UserName un=new UserName();
 			un.setName(name);
 			un.setPassword();
@@ -80,5 +81,6 @@ public class MainClass {
 		}
 		}
 		}
+		
 	}
 }

@@ -65,6 +65,9 @@ public class UserSignUp
 			   System.out.println("Details are Wrong");
 		   }
 		}
+		   myWorkBook.close();
+		   fis.close();
+		   in.close();
 	}
 
 }

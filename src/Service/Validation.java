@@ -9,23 +9,27 @@ public class Validation extends UserValidation implements AdminValidation
 	{
 		if((admin.getAdminName()).equals(admin.getAdminNameCheck()))
 				return true;
+		else
 		return false;
 	}
 	public boolean passwordValidation(Admin admin)
 	{
 		if((admin.getAdminPassword()).equals(admin.getAdminPassCheck()))
 			return true;
+		else
 		return false;
 	}
 	public boolean nameValidation(User user) {
 		
 		if((user.getUserName()).equals(user.getUserNameCheck()))
 			return true;
+		else
 		return false;
 	}
 	public boolean passwordValidation(User user) {
 		if((user.getUserPassword().equals(user.getUserPassCheck())))
 			return true;
+		else
 		return false;
 	}
 }
