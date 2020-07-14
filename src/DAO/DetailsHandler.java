@@ -21,21 +21,23 @@ public class DetailsHandler
 		XSSFWorkbook myWorkBook = new XSSFWorkbook (fis);
 		XSSFSheet ms = myWorkBook.getSheetAt(0);
 		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Enter Employee Name");
+		System.out.println("........................................................................");
+		System.out.println("Enter Employee Name :");
 	    String en=in.readLine();
-		System.out.println("Enter Employee ID");
+		System.out.println("Enter Employee ID :");
 		int id=Integer.parseInt(in.readLine());
-		System.out.println("Enter Employee Age");
+		System.out.println("Enter Employee Age :");
 		int age=Integer.parseInt(in.readLine());
-		System.out.println("Enter Employee Position");
+		System.out.println("Enter Employee Position :");
 		String position=in.readLine();
-		System.out.println("Enter Employee Email ID");
+		System.out.println("Enter Employee Email ID :");
 		String email=in.readLine();
-		System.out.println("Enter Employee Address");
+		System.out.println("Enter Employee Address :");
 		String address=in.readLine();
-		System.out.println("Enter Employee Basic Salary");
+		System.out.println("Enter Employee Basic Salary :");
 		double bs=Double.parseDouble(in.readLine());
-		System.out.println("Enter Employee deductions");
+		System.out.println("Enter Employee deductions :");
+		System.out.println("........................................................................\n\n");
 		double d=Double.parseDouble(in.readLine());
 		Employee obj=new Employee(en,id,age,position,address,bs,d);
 		int rd=ms.getLastRowNum();
@@ -62,7 +64,10 @@ public class DetailsHandler
 		cell10.setCellValue((String) "null");	
 		FileOutputStream os = new FileOutputStream(myFile);
         myWorkBook.write(os);
-        System.out.println("Done");
+        System.out.println("________");
+        System.out.println("|      |");
+        System.out.println("| Done |");
+        System.out.println("|______|");
         os.flush();
         os.close();
 		   myWorkBook.close();
@@ -76,6 +81,7 @@ public class DetailsHandler
 		XSSFWorkbook myWorkBook = new XSSFWorkbook (fis);
 		XSSFSheet ms = myWorkBook.getSheetAt(0);
 		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("........................................................................");
 	   System.out.println("Enter Employee Name");
 	   String name=in.readLine();
 	   System.out.println("Enter Employee Id");
@@ -95,6 +101,7 @@ public class DetailsHandler
 	   }
 	   if(j!=0)
 	   {
+		   System.out.println("________________________________________________________\n");
 		   System.out.println("Employee Name: "+(ms.getRow(j-1).getCell(0)).toString());
            System.out.println("Employee Id: "+(int)idl);
            double age=Double.parseDouble((ms.getRow(j-1).getCell(2)).toString());
@@ -111,10 +118,13 @@ public class DetailsHandler
            SalaryCalculator sc=new SalaryCalculator();
    		cell.setCellValue((Double) sc.salaryCalcutaions(bs,d));
            System.out.println("Employee Take Home Salary: "+(ms.getRow(j-1).getCell(7)).toString());
+           System.out.println("________________________________________________________\n");
 	   }
 	   else
 	   {
+		   System.out.println("_______________________\n");
 		   System.out.println("Wrong Search Name and ID");
+		   System.out.println("_______________________\n");
 	   }
 	   myWorkBook.close();
 	   fis.close();
@@ -127,6 +137,7 @@ public class DetailsHandler
 		XSSFSheet ms = myWorkBook.getSheetAt(0);
 		XSSFRow row;
 		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("........................................................................");
 	   System.out.println("Enter Employee Name");
 	   String name=in.readLine();
 	   System.out.println("Enter Employee Id");
@@ -187,7 +198,10 @@ public class DetailsHandler
         ms.removeRow(row);
 		FileOutputStream os = new FileOutputStream(myFile);
         myWorkBook.write(os);
-        System.out.println("Done");
+        System.out.println("________");
+        System.out.println("|      |");
+        System.out.println("| Done |");
+        System.out.println("|______|");
         os.flush();
         os.close();
 	   }
@@ -203,6 +217,7 @@ public class DetailsHandler
 		RegistrationValidation rv=new RegistrationValidation();
 		   SalaryCalculator sc=new SalaryCalculator();
 		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("........................................................................");
 	   System.out.println("Enter Employee Name");
 	   String name=in.readLine();
 	   System.out.println("Enter Employee ID");
@@ -229,6 +244,7 @@ public class DetailsHandler
 		   String pass=(ms.getRow(j).getCell(9).toString());
 	   while(kill!=1)
 	   {
+		   System.out.println("........................................................................");
 	   System.out.println("1.change ID");
 	   System.out.println("2.change Age");
 	   System.out.println("3.change Position");
@@ -237,6 +253,7 @@ public class DetailsHandler
 	   System.out.println("6.change Deduction");
 	   System.out.println("7.Change Email");
 	   System.out.println("8.Exit");
+	   System.out.println("........................................................................");
 	   System.out.println("Enter your choice:");
 	   int ch=Integer.parseInt(in.readLine());
 	   switch(ch)
@@ -246,8 +263,10 @@ public class DetailsHandler
 		   
 		  
 		   System.out.println("Previous Id: "+idthere);
+		   System.out.println("--------------------------------");
 		   System.out.println("Want to change?(y/n)");
 		   String c=in.readLine();
+		   System.out.println("--------------------------------");
 		   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 		   {
 			   System.out.println("Enter ID:");
@@ -261,8 +280,10 @@ public class DetailsHandler
 	   {
 			  
 			   System.out.println("Previous age: "+agethere);
+			   System.out.println("--------------------------------");
 			   System.out.println("Want to change?(y/n)");
 			   String c=in.readLine();
+			   System.out.println("--------------------------------");
 			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   System.out.println("Enter Age:");
@@ -275,8 +296,10 @@ public class DetailsHandler
 	   {
 			  
 			   System.out.println("Previous Position: "+posthere);
+			   System.out.println("--------------------------------");
 			   System.out.println("Want to change?(y/n)");
 			   String c=in.readLine();
+			   System.out.println("--------------------------------");
 			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   System.out.println("Enter Position:");
@@ -289,8 +312,10 @@ public class DetailsHandler
 	   {
 			 
 			   System.out.println("Previous Address: "+addthere);
+			   System.out.println("--------------------------------");
 			   System.out.println("Want to change?(y/n)");
 			   String c=in.readLine();
+			   System.out.println("--------------------------------");
 			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   System.out.println("Enter Address:");
@@ -304,8 +329,10 @@ public class DetailsHandler
 
 			 
 			   System.out.println("Previous Basic Salary: "+bsthere);
+			   System.out.println("--------------------------------");
 			   System.out.println("Want to change?(y/n)");
 			   String c=in.readLine();
+			   System.out.println("--------------------------------");
 			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   System.out.println("Enter Basic Salary:");
@@ -317,8 +344,10 @@ public class DetailsHandler
 	   case 6:
 	   {
 			   System.out.println("Previous Deduction: "+detthere);
+			   System.out.println("--------------------------------");
 			   System.out.println("Want to change?(y/n)");
 			   String c=in.readLine();
+			   System.out.println("--------------------------------");
 			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   System.out.println("Enter Deduction:");
@@ -334,8 +363,10 @@ public class DetailsHandler
 		   int flag=0;String emailnew="";
 
 		   System.out.println("Previous Email Id: "+emailthere);
+		   System.out.println("--------------------------------");
 		   System.out.println("Want to change?(y/n)");
 		   String c=in.readLine();
+		   System.out.println("--------------------------------");
 		   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 		   {
 			   while(flag!=1)
@@ -360,7 +391,7 @@ public class DetailsHandler
 	   }
 	   default:
 	   {
-		   System.out.println("Wrong choice!!! OOPS!!!");
+		   System.out.println("\t\t------Wrong choice!!! OOPS!!!--------");
 	   }
 	   }
 	   }
@@ -387,9 +418,13 @@ public class DetailsHandler
 		cell10.setCellValue((String) pass);
 		FileOutputStream os = new FileOutputStream(myFile);
        myWorkBook.write(os);
-       System.out.println("Done");
+       System.out.println("________");
+       System.out.println("|      |");
+       System.out.println("| Done |");
+       System.out.println("|______|");
        os.flush();
        os.close();
+       System.out.println("________________________________________________________\n");
 	   System.out.println("Employee Name: "+(ms.getRow(j).getCell(0)).toString());
 	   id=(int)Double.parseDouble((ms.getRow(j).getCell(1)).toString());
        System.out.println("Employee Id: "+(id));
@@ -401,6 +436,7 @@ public class DetailsHandler
        System.out.println("Employee Basic Salary: "+(ms.getRow(j).getCell(5)).toString());
        System.out.println("Employee Deduction: "+(ms.getRow(j).getCell(6)).toString());
        System.out.println("Employee Take Home Salary: "+(ms.getRow(j).getCell(7)).toString());
+       System.out.println("________________________________________________________\n");
 	   myWorkBook.close();
 	   fis.close();
    }

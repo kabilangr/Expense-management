@@ -2,7 +2,6 @@ package DAO;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 public class AdminPage 
 {
@@ -13,11 +12,13 @@ public void adminPage()throws Exception
 	BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
 	while(kill!=1)
 	{
+		System.out.println("........................................................................");
 	System.out.println("1.Create Employee");
 	System.out.println("2.Search Employee");
 	System.out.println("3.Remove Employee");
 	System.out.println("4.Change Employee details");
-	System.out.println("5.back to main");
+	System.out.println("5.Back to main");
+	System.out.println("........................................................................");
 	System.out.println("Enter your choice");
 	DetailsHandler dh=new DetailsHandler();
 	int ch=Integer.parseInt(in.readLine());
@@ -50,7 +51,7 @@ public void adminPage()throws Exception
 	}
 	default:
 	{
-		System.out.println("wrong choice");
+		System.out.println("\tWrong choice!!!! try again....");
 	}
 	}
 	}

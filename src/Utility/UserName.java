@@ -59,7 +59,7 @@ public class UserName
 		catch(NullPointerException e)
 		{
 		   this.password="";
-		   System.out.println("You need to SignUp First");
+		   System.out.println("------------------You need to SignUp First-------------------");
 		}
 		   myWorkBook.close();
 		   fis.close();

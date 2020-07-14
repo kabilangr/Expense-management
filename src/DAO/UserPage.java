@@ -42,12 +42,14 @@ public class UserPage {
 			int kill=0;
 			while(kill!=1)
 			{
+				System.out.println("........................................................................");
 			System.out.println("1.View Details");
 			System.out.println("2.View Salary");
 			System.out.println("3.Change Details");
 			System.out.println("4.Change Password");
 			System.out.println("5.Pay Slip");
-			System.out.println("6.Exit");
+			System.out.println("6.Back to main");
+			System.out.println("........................................................................");
 			System.out.println("Enter your choice");
 			int ch=Integer.parseInt(in.readLine());
 			switch(ch)
@@ -84,7 +86,7 @@ public class UserPage {
 			}
 			default:
 			{
-				System.out.println("Wrong Choice!! OOPS!!");
+				System.out.println("\t\t------------Wrong Choice!! OOPS!!--------------");
 			}
 				}
 			

@@ -10,20 +10,26 @@ public class MainClass {
 		int kill=0;
 		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
 		int c;
+		System.out.println("\n>>>>>>>>>>>>>>>>>>>>>Welcome to Employee Management System<<<<<<<<<<<<<<<<<<<<<<");
 		while(kill!=1) 
 		{	
+			System.out.println("........................................................................");
 		System.out.print("1.Admin login");
 		System.out.print("\n2.User login");
 		System.out.print("\n3.User signup");
 		System.out.print("\n4.Exit");
-		System.out.println("\nEnter your option");
+		System.out.println("\n........................................................................");
+		System.out.println("\nEnter your option :");
 		c=Integer.parseInt(in.readLine());
+		
 		switch(c)
 		{
 		case 1:
 		{
 			String name;String pass;
+			System.out.println("----------------------------");
 			System.out.println("Your have chosen Admin login");
+			System.out.println("----------------------------");
 			System.out.println("Enter Admin Name");
 			name=in.readLine();
 			System.out.println("Enter Admin Password");
@@ -39,12 +45,19 @@ public class MainClass {
               a.adminPage();
 			}
 			else
-				System.out.println("Wrong name or password");
+				{
+				System.out.println("...........................");
+				System.out.println("  Wrong name or password ");
+				System.out.println("...........................");
+				}
+				
 			break;
 		}
 		case 2:
 		{
+			System.out.println("---------------------------");
 			System.out.println("Your have chosen User login");
+			System.out.println("---------------------------");
 			System.out.println("Enter User Name");
 			String name=in.readLine();
 			System.out.println("Enter User Password");
@@ -63,21 +76,25 @@ public class MainClass {
 		}
 		case 3:
 		{
+			System.out.println("----------------------------");
 			System.out.println("Your have chosen User signup");
+			System.out.println("----------------------------");
 			UserSignUp us=new UserSignUp();
 			us.userSignUp();
 			break;
 		}
 		case 4:
 		{
-			System.out.println("Your have chosen EXIT");
-			System.out.println("BYE BYE!!!!");
+			System.out.println("\t\tYour have chosen EXIT");
+			System.out.println("\t\tBYE BYE!!!!");
 			kill=1;
 			break;
 		}
 		default:
 		{
-			System.out.println("\nWrong choice try again");
+			System.out.println("-------------------------");
+			System.out.println("Wrong choice :( try again");
+			System.out.println("-------------------------");
 		}
 		}
 		}

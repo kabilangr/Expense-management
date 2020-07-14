@@ -27,12 +27,14 @@ public class UserDetails {
 		XSSFSheet ms = myWorkBook.getSheetAt(0);
 		int id=(int)(Double.parseDouble((ms.getRow(f).getCell(1)).toString()));
 		int age=(int)(Double.parseDouble((ms.getRow(f).getCell(2)).toString()));
+		System.out.println("........................................................................");
 		 System.out.println("Your Name: "+(ms.getRow(f).getCell(0)).toString());
          System.out.println("Your Id: "+id);
          System.out.println("Your Age: "+age);
          System.out.println("Your Position: "+(ms.getRow(f).getCell(3)).toString());
          System.out.println("Your Email:"+(ms.getRow(f).getCell(8)).toString());
          System.out.println("Your Address: "+(ms.getRow(f).getCell(4)).toString());
+         System.out.println("........................................................................");
   	   myWorkBook.close();
   	   fis.close();
 
@@ -45,7 +47,7 @@ public class UserDetails {
 		XSSFSheet ms = myWorkBook.getSheetAt(0);
 		double gross=0;
 		double bs=Double.parseDouble((ms.getRow(f).getCell(5)).toString());
-		//gross=basicSalary+medicalAllowance-(0.0367*basicSalary);
+		System.out.println("________________________________________________________\n");
         System.out.println("Your Basic Salary: "+bs);
         System.out.println("Your Deduction: "+(ms.getRow(f).getCell(6)).toString());
         System.out.println("Your medicalAllowance:"+(4000));
@@ -60,6 +62,7 @@ public class UserDetails {
 		else 
 	        System.out.println("Your Tax%: 0%"+"\nYour Tax Amount:"+ (0));
         System.out.println("Your Take Home Salary: "+(ms.getRow(f).getCell(7)).toString());
+        System.out.println("________________________________________________________\n");
  	   myWorkBook.close();
  	   fis.close();
  	
@@ -85,10 +88,12 @@ public class UserDetails {
 		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
 		 while(kill!=1)
 		   {
+			 System.out.println("........................................................................");
 		   System.out.println("1.change Age");
 		   System.out.println("2.change Address");
 		   System.out.println("3.Change Email");
 		   System.out.println("4.Exit");
+		   System.out.println("........................................................................");
 		   System.out.println("Enter your choice:");
 		   int ch=Integer.parseInt(in.readLine());
 		   switch(ch)
@@ -96,8 +101,10 @@ public class UserDetails {
 		   case 1:
 		   {
 			   System.out.println("Your Previous age: "+agethere);
+			   System.out.println("_______________________\n");
 			   System.out.println("Want to change?(y/n)");
 			   String c=in.readLine();
+			   System.out.println("_______________________\n");
 			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   System.out.println("Enter Age:");
@@ -109,8 +116,10 @@ public class UserDetails {
 		   case 2:
 		   {
 			   System.out.println("Your Previous Address: "+addthere);
+			   System.out.println("_______________________\n");
 			   System.out.println("Want to change?(y/n)");
 			   String c=in.readLine();
+			   System.out.println("_______________________\n");
 			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   System.out.println("Enter Address:");
@@ -124,8 +133,10 @@ public class UserDetails {
 			   int flag=0;String emailnew="";
 
 			   System.out.println("Previous Email Id: "+emailthere);
+			   System.out.println("_______________________\n");
 			   System.out.println("Want to change?(y/n)");
 			   String c=in.readLine();
+			   System.out.println("_______________________\n");
 			   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 			   {
 				   while(flag!=1)
@@ -138,7 +149,7 @@ public class UserDetails {
 					   flag=1;
 				   }
 				   else
-					   System.out.println("Enter a valid Email Id");
+					   System.out.println("--------------Enter a valid Email Id----------------");
 				   }
 			   }
 			   break;
@@ -150,7 +161,7 @@ public class UserDetails {
 		   }
 		   default:
 		   {
-			   System.out.println("Wrong choice!! OOPS!!");
+			   System.out.println("/t/t--------Wrong choice!! OOPS!!---------");
 		   }
 		   }
 		   }
@@ -177,15 +188,20 @@ public class UserDetails {
 			cell10.setCellValue((String) passthere);
 			FileOutputStream os = new FileOutputStream(myFile);
 	       myWorkBook.write(os);
-	       System.out.println("Done");
+	        System.out.println("________");
+	        System.out.println("|      |");
+	        System.out.println("| Done |");
+	        System.out.println("|______|");
 	       os.flush();
 	       os.close();
+	       System.out.println("........................................................................");
 		   System.out.println("Your Name: "+(ms.getRow(f).getCell(0)).toString());
 	       System.out.println("Your Id: "+(ms.getRow(f).getCell(1)).toString());
 	       System.out.println("Your Age: "+(ms.getRow(f).getCell(2)).toString());
 	       System.out.println("Your Position: "+(ms.getRow(f).getCell(3)).toString());
 	       System.out.println("Your Email:"+(ms.getRow(f).getCell(8)).toString());
 	       System.out.println("Your Address: "+(ms.getRow(f).getCell(4)).toString());
+	       System.out.println("........................................................................");
 		   myWorkBook.close();
 		   fis.close();
 	}
@@ -210,20 +226,25 @@ public class UserDetails {
 		   int kill=0;int flag=0;
 		   while(kill!=3)
 		   {
+			   System.out.println("........................................................................");
 			   System.out.println("Enter Prevoius Password");
 			   String oldpass=in.readLine();
 			   if(oldpass.equals(passthere))
 			   {
+				   System.out.println("_______________________\n");
 		   System.out.println("Want to change?(y/n)");
 		   String c=in.readLine();
+		   System.out.println("_______________________\n");
 		   if((c.charAt(0)=='y')||(c.charAt(0)=='Y'))
 		   {
 			   while(flag!=1)
 			   {
+				   System.out.println("........................................................................");
 			   System.out.println("Enter New Password:");
 			   String passnew=in.readLine();
 			   System.out.println("Enter Confirm Password:");
 			   String passnew1=in.readLine();
+			   System.out.println("........................................................................");
 			   if(rv.validPassword(passnew, passnew1))
 			   {
                   passthere=passnew;
@@ -231,7 +252,7 @@ public class UserDetails {
             flag=1;
 			   }
 			   else 
-				   System.out.println("Enter a Strong Password....Check Whether both new and confirm password are same");
+				   System.out.println("....Enter a Strong Password....Check Whether both new and confirm password are same.....");
 		   }
 			   
 		   }
@@ -239,7 +260,7 @@ public class UserDetails {
 			   kill=3;
 			   }
 		   else
-		   { System.out.println("Incorrect Password");
+		   { System.out.println("---------------Incorrect Password-------------------");
             kill++;}
 		   
 		   }
@@ -266,7 +287,10 @@ public class UserDetails {
 			cell10.setCellValue((String) passthere);
 			FileOutputStream os = new FileOutputStream(myFile);
 	       myWorkBook.write(os);
-	       System.out.println("Done");
+	        System.out.println("________");
+	        System.out.println("|      |");
+	        System.out.println("| Done |");
+	        System.out.println("|______|");
 	       os.flush();
 	       os.close();
 		   myWorkBook.close();
@@ -303,9 +327,13 @@ public class UserDetails {
 		try {
 			PdfWriter w=PdfWriter.getInstance(document, new FileOutputStream("PaySlip.pdf"));
 			document.open();
-			document.add(new Paragraph("Name:"+name+"\nId:"+id+"\nPosition:"+position+"\nEmail Id:"+email+"\nAddress"+address+
-					"\n\n\n\n-----------------YOUR SALARY-----------------\n"+"Basic salary:\t"+bs+"\nDeduction:\t+"+deduction
-					+"\nMedical Al.:\t+"+medical+"\nGrossPay:\t="+gross+"\nTax:  \t-"+tax+"\nTakeHome:\t="+take));
+			document.add(new Paragraph("Name : "+name+"\nID : "+id+"\nPosition : "+position+"\nEmail Id : "+email+"\nAddress : "+address+
+					"\n\n\n\n\t--------------------------------------------------------YOUR SALARY----------------------------------------------------\n\n\n"+
+					"\t                              Basic salary :\t"+bs+"\n\t                              Deduction    :\t+"+deduction
+					+"\n\t                              Medical Al.   :\t+"+
+					medical+"\n\t                              GrossPay     :\t="+gross+
+					"\n\t                              Tax               :  \t-"+tax+
+					"\n\t                              TakeHome   :\t="+take));
 			document.close();
 			w.close();
 		}
@@ -317,6 +345,10 @@ public class UserDetails {
 		{
 			e.printStackTrace();
 		}
+        System.out.println("________");
+        System.out.println("|      |");
+        System.out.println("| Done |");
+        System.out.println("|______|");
 		   myWorkBook.close();
 		   fis.close();
 

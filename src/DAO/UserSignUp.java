@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
-import java.util.Scanner;
+
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -16,7 +16,6 @@ public class UserSignUp
 {
 	public void userSignUp()throws Exception
 	{
-		int k=0;
 		RegistrationValidation rv=new RegistrationValidation();
 		File myFile = new File("./Check.xlsx"); 
 		FileInputStream fis = new FileInputStream(myFile);
@@ -24,6 +23,7 @@ public class UserSignUp
 		XSSFSheet ms = myWorkBook.getSheetAt(0);
 		XSSFRow row;
 		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("........................................................................");
 		System.out.println("Enter Your Name:");
 		String name=in.readLine();
 		System.out.println("Enter Your Id:");
@@ -36,6 +36,7 @@ public class UserSignUp
 		String pass=in.readLine();
 		System.out.println("Confirm Password");
 		String passcon=in.readLine();
+		System.out.println("........................................................................");
 		 int idl=0;
 		   String str="";
 		   int j=0;
@@ -84,11 +85,14 @@ public class UserSignUp
 		   }
 		   else
 		   {
-			   System.out.println("Details are Wrong");
+			   System.out.println(".........................Details are Wrong....................");
 		   }
 		   FileOutputStream os = new FileOutputStream(myFile);
 	        myWorkBook.write(os);
-	        System.out.println("Done");
+	        System.out.println("________");
+	        System.out.println("|      |");
+	        System.out.println("| Done |");
+	        System.out.println("|______|");
 	        os.flush();
 	        os.close();
 		   myWorkBook.close();
